@@ -8,7 +8,11 @@ SET(TARGET "test_MC_3_parallel")
 
 # Declare all source files the target consists of:
 SET(TARGET_SRC
-  Project.cpp
+  #Project.cpp
+  #test_Stokes.cpp
+  test_Navier_Stokes.cpp
+  #test_MC.cpp
+  #test_knn.cpp
   RandomGenerator.cpp
   # You can specify additional files here!
   )

@@ -46,9 +46,9 @@ void update_statistics_s(	int old_n, 			int new_n,
 
 
 // update statistics of vector data
-void update_statistics_v(	int old_n, 					int new_n,
-							Vector<double> &mean,		Vector<double> &addit_mean,
-							Vector<double> &variance,	Vector<double> &addit_variance )
+void update_statistics_v(	int old_n, 						int new_n,
+							BlockVector<double> &mean,		BlockVector<double> &addit_mean,
+							BlockVector<double> &variance,	BlockVector<double> &addit_variance )
 {
 	if ( new_n == 1 )
 	{

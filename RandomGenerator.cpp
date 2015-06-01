@@ -30,7 +30,7 @@ namespace MonteCarlo
 	std::normal_distribution<double> normal_distribution (0.0, 1.0);
 
 	// lognormal distribution
-	std::lognormal_distribution<double> lognormal_distribution(0.0,1.0);
+	std::lognormal_distribution<double> lognormal_distribution(0.0, 1.0);
 
 
 	auto generate_uniform 	= std::bind ( uniform_distribution,   uniform_generator );
@@ -40,62 +40,43 @@ namespace MonteCarlo
 
 /*------------------------------ Class implementation -----------------------*/
 
-	// constructor
-	RandomGenerator::RandomGenerator( int type_of_distribution )
+	void RandomGenerator::generate( double &value )
 	{
-		vector_size = 1;
-		random_vector = new double[1];
-
-		switch (type_of_distribution)
+		switch ( distribution )
 		{
 			case Uniform:
-				random_vector[0] = generate_uniform();
+				value = generate_uniform();
 				break;
 			case Normal:
-				random_vector[0] = generate_normal();
+				value = generate_normal();
 				break;
 			case LogNormal:
-				random_vector[0] = generate_lognormal();
+				value = generate_lognormal();
 				break;
 		}
 	}
 
 
-	// constructor
-	RandomGenerator::RandomGenerator( int type_of_distribution, int n)
-	{
-		vector_size = n;
-		random_vector = new double[n];
 
-		switch (type_of_distribution)
+	void RandomGenerator::generate( std::vector<double> &vector )
+	{
+		int n = vector.size();
+
+		switch ( distribution )
 		{
 			case Uniform:
 				for ( int i = 0; i < n; i++)
-					random_vector[i] = generate_uniform();
+					vector[i] = generate_uniform();
 				break;
 			case Normal:
 				for ( int i = 0; i < n; i++)
-					random_vector[i] = generate_normal();
+					vector[i] = generate_normal();
 				break;
 			case LogNormal:
 				for ( int i = 0; i < n; i++)
-					random_vector[i] = generate_lognormal();
+					vector[i] = generate_lognormal();
 				break;
 		}
-	}
-
-
-	// return single random value
-	double RandomGenerator::value()
-	{
-		return random_vector[0];
-	}
-
-
-	// return pointer to the random array
-	double *RandomGenerator::vector( )
-	{
-		return random_vector;
 	}
 
 }//MonteCarlo

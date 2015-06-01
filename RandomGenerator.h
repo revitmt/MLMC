@@ -8,6 +8,8 @@
 #ifndef RANDOMGENERATOR_H_
 #define RANDOMGENERATOR_H_
 
+#include <vector>
+
 namespace MonteCarlo
 {
 
@@ -17,15 +19,13 @@ namespace MonteCarlo
 	class RandomGenerator
 	{
 		public:
-			RandomGenerator( int type_of_distribution );
-			RandomGenerator( int type_of_distribution, int n );
+			RandomGenerator( int type_of_distribution ) : distribution(type_of_distribution) {};
 			virtual ~RandomGenerator() {};
-			double value();
-			double *vector( );
-			int vector_size;
+			void generate( double &value );
+			void generate( std::vector<double> &vector );
 
 		private:
-			double *random_vector;
+			int distribution;
 	};
 
 

@@ -24,21 +24,19 @@ namespace MonteCarlo
 	class RandomField : public Function<dim>
 	{
 		public:
-			RandomField() {};
+			RandomField() : Function<dim>(dim+1) {};
 			virtual ~RandomField() {};
-			void generate();									// generate instance, i.e. generate random vector
+			void generate( int type_of_distribution );									// generate instance, i.e. generate random vector
 			void set_random_vector(std::vector<double>	&set_vector);
 			static int get_stoch_dim();
 
 		protected:
 			std::vector<double>		random_vector;
-			static distributions	type_of_distribution;
 			static int				stoch_dim;
 			virtual double phi( double x, int n ) const = 0;	// n-th eigenfunction value of the K-L series
 			virtual double ksi( int n ) const = 0;				// n-th eigenvalue of the K-L series
 	};
 
-	template<int dim> distributions 	RandomField<dim>::type_of_distribution;
 	template<int dim> int 				RandomField<dim>::stoch_dim;
 
 
@@ -48,19 +46,16 @@ namespace MonteCarlo
 
 
 	template< int dim >
-	void RandomField<dim>::generate()
+	void RandomField<dim>::generate( int type_of_distribution )
 	{
-		RandomGenerator generate1( type_of_distribution, stoch_dim );
-		double *vector = generate1.vector();
+		RandomGenerator random_generator( type_of_distribution );
 
-		random_vector.assign( vector, vector + stoch_dim );
-
-		delete vector;
+		random_generator.generate( random_vector );
 	}
 
 
 	template< int dim >
-	void RandomField<dim>::set_random_vector(std::vector<double>	&set_vector)
+	void RandomField<dim>::set_random_vector( std::vector<double> &set_vector )
 	{
 		random_vector = set_vector;
 	}

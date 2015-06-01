@@ -167,7 +167,7 @@ namespace MonteCarlo
 		{
 			DiscretizationData<dim>::add_next_level( init_level );										// generate next level
 			Problem<dim> problem;
-			problem.add_next_level_data();														// assemble deterministic rhs & boundary conditions
+			problem.add_next_level_data();																// assemble deterministic rhs & boundary conditions
 
 			solution_type<dim> level_solution(test_level), level_variance(test_level);					// initialize solution & variance at this level
 
@@ -262,8 +262,8 @@ namespace MonteCarlo
 		std::cout << std::endl << "Start MLMC solver" << std::endl;
 		int samples_to_generate = std::accumulate( num_of_samples.begin(), num_of_samples.end(), 0 );
 		int loop = 1;
-//		while ( samples_to_generate != 0 )
-		while ( loop < 2 )
+		while ( samples_to_generate != 0 )
+//		while ( loop < 2 )
 		{
 
 			/************************************************************************************************************************************************************************/
